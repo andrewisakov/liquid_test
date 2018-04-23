@@ -14,12 +14,13 @@ async def fetch(session, url):
 
 
 async def main(url):
-    body = None
+    html = None
     domain = url.split('//')[-1].split('/')[0]
     proto = ("%r" % (url.split(':')[0] + '://'))[1:-1]
+
     async with aiohttp.ClientSession() as session:
-        html = await fetch(session, URL)
-        # print(body)
+        html = await fetch(session, url)
+
     if html:
         pattern = 'href="([^"]*)"[^>]*>([\s\S]*?)</a>'
         regex = re.compile(r'^((http|https):)?//')
